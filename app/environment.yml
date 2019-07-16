@@ -1,0 +1,9 @@
+name: yelp
+dependencies:
+  - numpy
+  - pandas=0.24.2
+  - scikit-learn
+  - matplotlib
+  - langdetect
+  - spacy
+  - conda-forge::wordcloud
