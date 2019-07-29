@@ -16,6 +16,7 @@ else:
 city = "Pittsburgh"
 category = "Restaurant"
 
+
 """
 Business_ids:
 006 = {str} 'c0yPNU-BqS65u0vIKP7P0w'
@@ -33,7 +34,7 @@ Business_ids:
 """
 
 # extracts the business id for a specific city and category
-business_ids_one_city = dataPreprocessing.extract_business_ids_from_one_city('Pittsburgh', "Restaurant", 'app/business.json')
+business_ids_one_city = dataPreprocessing.extract_business_ids_from_one_city(city, category, 'app/business.json')
 
 # extracts the raw reviews for the business ids
 raw_reviews = dataPreprocessing.extract_texts(business_ids_one_city, category,city)
@@ -57,5 +58,5 @@ predictiton, top_words, stars = vectorizeAndTrain.predict_and_vectorize(request_
 
 #visualizations
 visualization.pie_chart(predictiton, top_words, specified_business_id)
-visualization.word_cloud(lda, 5, vectorizer,specified_business_id)
+visualization.word_cloud(lda, 5, vectorizer)
 visualization.average_star_rating(predictiton, stars, specified_business_id)

@@ -89,21 +89,21 @@ def text_preprocessing(raw_reviews, category, city,request=False):
             lemmatized = " ".join([tok.lemma_ for tok in nlp(stop_words)])
 
             list_lemmatized.append(lemmatized)
-            if i % 500 == 0 and i != 0 or i == int(length / 2) - 1 and path and not request:
+            if i % 500 == 0 and i != 0 or i == length - 1 and not request:
                 output = open(path, 'ab+')
                 pickle.dump(list_lemmatized, output)
                 output.close()
                 list_lemmatized.clear()
-
-        f = open(path, 'rb')
-        bool = True
-        while bool:
-            try:
-                help = pickle.load(f)
-                list_lemmatized.extend(help)
-            except EOFError:
-                bool = False
-        f.close()
+        if not request:
+            f = open(path, 'rb')
+            bool = True
+            while bool:
+                try:
+                    help = pickle.load(f)
+                    list_lemmatized.extend(help)
+                except EOFError:
+                    bool = False
+            f.close()
     return list_lemmatized
 
 

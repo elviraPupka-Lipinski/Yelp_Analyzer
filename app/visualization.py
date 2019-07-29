@@ -25,7 +25,7 @@ def pie_chart(prediction, top_words, business_id):
 
 # visualizes the top words in the reviews of each topic as a word cloud,
 # regarding there occurrence in the reviews of the specific business id .
-def word_cloud(model, n_top_words, vectorizer, specified_business_id):
+def word_cloud(model, n_top_words, vectorizer):
     feature_names = vectorizer.get_feature_names()
     for topic_idx, topic in enumerate(model.components_):
         weighted = {}
@@ -37,9 +37,9 @@ def word_cloud(model, n_top_words, vectorizer, specified_business_id):
         plt.subplots()
         plt.imshow(wordcloud, interpolation='bilinear')
         plt.axis("off")
-        plt.title("Top words of Topic " + str(topic_idx) + " for business ID: " + str(specified_business_id))
+        plt.title("Top words of Topic " + str(topic_idx))
         plt.tight_layout()
-        plt.savefig("wordcloud_"+str(topic_idx)+"_"+str(specified_business_id)+".png")
+        plt.savefig("wordcloud_"+str(topic_idx)+".png")
         plt.show()
 
 
@@ -54,7 +54,6 @@ def average_star_rating(predictiton, stars, specified_business_id):
         ratings[best_topic].append(float(stars[i]))
 
     for key in ratings.keys():
-        print("Topic "+ str(key)+": ")
         calculation = (sum(ratings[key])/len(ratings[key]))
         end_rating.update({key: calculation})
     # sorting the Topics, so that Topic 0 is the first one
